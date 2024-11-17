@@ -418,14 +418,14 @@ namespace rtsp_stream {
 
     int
     bind(net::af_e af, std::uint16_t port, boost::system::error_code &ec) {
-      acceptor.open(af == net::IPV4 ? tcp::v4() : tcp::v6(), ec);
+      acceptor.open(af == net::IPV4 ? boost::asio::ip::make_address("10.1.0.231") : tcp::v6(), ec);
       if (ec) {
         return -1;
       }
 
       acceptor.set_option(boost::asio::socket_base::reuse_address { true });
 
-      acceptor.bind(tcp::endpoint(af == net::IPV4 ? tcp::v4() : tcp::v6(), port), ec);
+      acceptor.bind(tcp::endpoint(af == net::IPV4 ? boost::asio::ip::make_address("10.1.0.231") : tcp::v6(), port), ec);
       if (ec) {
         return -1;
       }
